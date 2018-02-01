@@ -1,0 +1,27 @@
+﻿@model Stalker.Models.ManagementModel
+
+@{
+    ViewBag.Title = "Редактирование управления";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Изменения в управлении</h2>
+
+@using (Html.BeginForm("EditManagement", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(h => h.ManagementId)
+    <div class="form-group">
+        @Html.LabelFor(l => l.FullName)
+        @Html.TextBoxFor(t => t.FullName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.FullName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.ShortName)
+        @Html.TextBoxFor(t => t.ShortName, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.ShortName)
+    </div>
+    @Html.ActionLink("Отмена", "Managements", "Admin", null, new { @class = "btn btn-default" })
+    <button class="btn btn-success" type="submit">Сохранить</button>
+}

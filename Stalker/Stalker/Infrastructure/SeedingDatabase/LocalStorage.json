@@ -1,0 +1,145 @@
+﻿{
+  "Managements": [
+    {
+      "FullName": "Хабаровскийу край",
+      "ShortName": "Х/к",
+      "Departments": [
+        {
+          "FullName": "4 отдел",
+          "ShortName": "4"
+        },
+        {
+          "FullName": "5 отдел",
+          "ShortName": "5"
+        },
+        {
+          "FullName": "6 отдел",
+          "ShortName": "6"
+        },
+        {
+          "FullName": "7 отдел",
+          "ShortName": "7"
+        },
+        {
+          "FullName": "8 отдел",
+          "ShortName": "8"
+        },
+        {
+          "FullName": "9 отдел",
+          "ShortName": "9"
+        },
+        {
+          "FullName": "10 отдел",
+          "ShortName": "10"
+        }
+      ]
+    },
+
+    {
+      "FullName": "Приморский край",
+      "ShortName": "Приморье",
+      "Departments": [
+        {
+          "FullName": "1 отдел",
+          "ShortName": "1"
+        },
+        {
+          "FullName": "2 отдел",
+          "ShortName": "2"
+        }
+      ]
+    }
+  ],
+
+  "Regions": [
+    {
+      "RegionName": "Хабаровский край",
+      "Cities": [
+        {
+          "CityName": "Хабаровск"
+        },
+        {
+          "CityName": "Комсомольск-На-Амуре"
+        },
+        {
+          "CityName": "Николаевск-На-Амуре"
+        },
+        {
+          "CityName": "Советская Гавань"
+        },
+        {
+          "CityName": "Ванино"
+        }
+      ]
+    },
+
+    {
+      "RegionName": "Приморский край",
+      "Cities": [
+        {
+          "CityName": "Владивосток"
+        },
+        {
+          "CityName": "Уссурийск"
+        }
+      ]
+    },
+
+    {
+      "RegionName": "Еврейская автономная область",
+      "Cities": []
+    }
+  ],
+
+  "StalkerIdentityRoles": [
+    {
+      "Name": "Administrator",
+      "DisplayName": "Администратор",
+      "Description": "Обладает правами доступа к любым модулям"
+    },
+    {
+      "Name": "Manager",
+      "DisplayName": "Менеджер заданий",
+      "Description": "Распределяет задания"
+    },
+    {
+      "Name": "Operator",
+      "DisplayName": "Оператор заданий",
+      "Description": "Пользователям с этой ролью доступны задания"
+    }
+  ],
+
+  "StalkerIdentityUsers": [
+    {
+      "UserName": "Admin",
+      "Password": 123456,
+      "UserInfo": {
+        "DepartmentId": "2",
+        "ManagementId": "1",
+        "CityId": "1",
+        "RegionId": "1",
+        "DateBirth": "01/01/1920"
+      }
+    },
+    {
+      "UserName": "vvv",
+      "Password": 123456,
+      "UserInfo": {
+        "DepartmentId": "3",
+        "ManagementId": "1",
+        "CityId": "1",
+        "RegionId": "1"
+      }
+    },
+    {
+      "UserName": "aaa",
+      "Password": 123456,
+      "UserInfo": {
+        "DepartmentId": "3",
+        "ManagementId": "1",
+        "CityId": "1",
+        "RegionId": "1"
+      }
+    }
+  ]
+}

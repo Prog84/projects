@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Stalker.Models.ManagementModel>
+
+@{
+    ViewBag.Title = "Управления";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Управления</h2>
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <tr>
+            <th>Полное наименование</th>
+            <th>Сокращенное наименование</th>
+            <th class="pull-right">Действия</th>
+        </tr>
+        @foreach (var management in Model)
+        {
+            <tr>
+                <td>@management.FullName</td>
+                <td>@management.ShortName</td>
+                <td class="pull-right">
+                    @Html.ActionLink("Редактировать", "EditManagement", "Admin", new { mangementId = management.ManagementId }, new { @class = "btn btn-primary btn-xs pull-right" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.ActionLink("Создать", "CreateManagement", "Admin", null, new { @class = "btn btn-primary" })

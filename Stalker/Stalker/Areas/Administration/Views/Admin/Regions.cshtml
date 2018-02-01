@@ -1,0 +1,25 @@
+﻿@using Stalker.Models
+@model List<RegionModel>
+
+@{
+    ViewBag.Title = "Регионы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Регионы</h2>
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <tr>
+            <th>Название</th>
+            <th class="pull-right">Действия</th>
+        </tr>
+        @foreach (var region in Model)
+        {
+            <tr>
+                <td>@region.RegionName</td>
+                <td>@Html.ActionLink("Редактировать", "EditRegion", "Admin", new { regionId = region.RegionId }, new { @class = "btn btn-primary btn-xs pull-right" })</td>
+            </tr>
+        }
+    </table>
+</div>
+@Html.ActionLink("Добавить", "CreateRegion", "Admin", null, new { @class = "btn btn-primary" })

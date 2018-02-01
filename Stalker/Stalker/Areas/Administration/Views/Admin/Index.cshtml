@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Администрирование";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Администрирование</h2>
+<div class="list-group">
+    @Html.ActionLink("Управления - список управлений.", "Managements", "Admin", new {@class = "list-group-item"})
+    @Html.ActionLink("Отделы - список отделов.", "Departments", "Admin", new { @class = "list-group-item" })
+    @Html.ActionLink("Пользователи - создание и редактирование пользователей.", "Users", "Admin", new { @class = "list-group-item" })
+    @Html.ActionLink("Справочник городов", "Cities", "Admin", new { @class = "list-group-item" })
+    @Html.ActionLink("Справочник регионов", "Regions", "Admin", new { @class = "list-group-item" })
+</div>

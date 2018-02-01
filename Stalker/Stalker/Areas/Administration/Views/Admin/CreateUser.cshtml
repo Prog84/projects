@@ -1,0 +1,98 @@
+﻿@model Stalker.Models.UserDetailsModel
+
+@{
+    ViewBag.Title = "Создание учетной записи";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        UpdateTargetId = "citiesDropDown",
+        Url = Url.Action("GetCitiesDataJson")
+
+    };
+}
+
+<h2>Создание учетной записи</h2>
+<div class="col-xs-4">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.UserName)
+            @Html.TextBoxFor(x => x.UserName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.UserFamily)
+            @Html.TextBoxFor(x => x.UserFamily, new {@class = "form-control"})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.UserOtch)
+            @Html.TextBoxFor(x => x.UserOtch, new {@class = "form-control"})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.UserDateBirth)<br/>
+            @Html.TextBoxFor(x => x.UserDateBirth, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker"})
+            @Html.ValidationMessageFor(m => m.UserDateBirth)
+        </div>
+
+       @* <div class="form-group">
+        @Html.LabelFor(l => l.PhoneNumber)
+        @Html.TextBoxFor(x => x.PhoneNumber, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.PhoneNumber)
+    </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.SelectedRegionId)
+            @Html.DropDownList("SelectedRegionId", null, new {@id = "regionsList", @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.SelectedRegionId)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.SelectedCityId)
+            @Html.DropDownList("SelectedCityId", null, new {@id = "citiesDropDown", @class = "form-control"})
+            @Html.ValidationMessageFor(m => m.SelectedCityId)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.UserLogin)
+            @Html.TextBoxFor(x => x.UserLogin, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.UserLogin)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.Password)
+            @Html.PasswordFor(x => x.Password, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.ConfirmPassword)
+            @Html.PasswordFor(x => x.ConfirmPassword, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.SelectedManagementId)
+            @Html.DropDownList("SelectedManagementId", null, new {@class = "form-control", @id = "managementsDropDown"})
+            @Html.ValidationMessageFor(m => m.SelectedManagementId)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.SelectedDepartmentId)
+            @Html.DropDownList("SelectedDepartmentId", null, new {@class = "form-control", @id = "departmentsDropDown" })
+            @Html.ValidationMessageFor(m => m.SelectedDepartmentId)
+        </div>
+
+        @Html.ActionLink("Отмена", "Index", null, new {@class = "btn btn-default"})
+        <button type="submit" class="btn btn-success">Создать</button>
+    }
+</div>
+
+@section GetCitiesScriptRender{
+    @Html.Partial("GetCitiesScript")
+}
+

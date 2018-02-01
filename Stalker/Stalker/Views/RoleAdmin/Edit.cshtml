@@ -1,0 +1,66 @@
+﻿@using Stalker.Models
+@using Stalker.Entities
+@model RoleEditModel
+
+@{
+    ViewBag.Title = "Роль";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="h3">Общее</div>
+    <p>Системное имя: @Model.Role.Name</p>
+    @Html.ValidationMessageFor(m => m.DisplayName)<br/>
+    <label>Отображаемое имя:</label>
+    @Html.EditorFor(d => d.DisplayName, new { @class = "form-control", name = "DisplayName" })
+
+<div class="h3">Добавление пользователей к роли</div>
+    <input type="hidden" name="roleName" value="@Model.Role.Name" />
+    <div class="panel panel-primary">
+        <div class="panel-heading">Добавить к @Model.Role.DisplayName</div>
+        <table class="table table-striped">
+            @if (!Model.NonMembers.Any())
+            {
+                <tr><td colspan="2">Все пользователи являюся членами этой группы</td></tr>
+            }
+            else
+            {
+                <tr><td>Имя пользователя</td><td>Добавить к роли</td></tr>
+                foreach (StalkerIdentityUser user in Model.NonMembers)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <input type="checkbox" name="IdsToAdd" value="@user.Id">
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">Удалить из @Model.Role.DisplayName</div>
+        <table class="table table-striped">
+            @if (!Model.Members.Any())
+            {
+                <tr><td colspan="2">Пока никто не является членом этой группы</td></tr>
+            }
+            else
+            {
+                <tr><td>Имя пользователя</td><td>Удалить из роли</td></tr>
+                foreach (StalkerIdentityUser user in Model.Members)
+                {
+                    <tr>
+                        <td>@user.UserName</td>
+                        <td>
+                            <input type="checkbox" name="IdsToDelete" value="@user.Id">
+                        </td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    @Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-default" })
+}  

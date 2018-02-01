@@ -1,0 +1,31 @@
+﻿@model Stalker.Models.DepartmentModel
+
+@{
+    ViewBag.Title = "Редактирование отдела";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Редактирование отдела</h2>
+@using (Html.BeginForm("EditDepartment", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(h => h.DepartmentId)
+    <div class="form-group">
+        @Html.LabelFor(l => l.FullName)
+        @Html.TextBoxFor(t => t.FullName, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.FullName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.ShortName)
+        @Html.TextBoxFor(e => e.ShortName, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.ShortName)
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Управление")
+        @Html.DropDownListFor(s => s.SelectedManagementId, new SelectList(Model.Managements, "ManagementId", "FullName"), new {@class = "form-control"})
+    </div>
+    @Html.ActionLink("Отмена", "Departments", "Admin", null, new { @class = "btn btn-default"})
+    <button type="submit" class="btn btn-success">Сохранить</button>
+}

@@ -1,0 +1,30 @@
+﻿@model List<Stalker.Entities.Department>
+
+@{
+    ViewBag.Title = "Отделы";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Отделы</h2>
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <tr>
+            <th>Полное наименование</th>
+            <th>Сокращенное наименование</th>
+            <th>Управление</th>
+            <th class="pull-right">Действия</th>
+        </tr>
+        @foreach (var department in Model)
+        {
+            <tr>
+                <td>@department.FullName</td>
+                <td>@department.ShortName</td>
+                <td>@department.Management.FullName</td>
+                <td class="pull-right">
+                    @Html.ActionLink("Редактировать", "EditDepartment", "Admin", new { departmentId = department.DepartmentId }, new { @class = "btn btn-primary btn-xs pull-right" })
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+@Html.ActionLink("Создать", "CreateDepartment", "Admin", null, new { @class="btn btn-primary"})

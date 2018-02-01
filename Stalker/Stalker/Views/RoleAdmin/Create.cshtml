@@ -1,0 +1,28 @@
+﻿@model Stalker.Entities.StalkerIdentityRole
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Создание новой роли</h2>
+<div class="col-xs-4">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken();
+
+        <div class="form-group">
+            @Html.Label("Название роли")
+            @Html.TextBoxFor(e => e.Name, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.DisplayName)
+            @Html.TextBoxFor(e => e.DisplayName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.DisplayName)
+        </div>
+        @Html.ActionLink("Отмена", "Index", null, new { @class = "btn btn-default" })
+        <button type="submit" class="btn btn-success">Создать</button>
+    }
+</div>
+

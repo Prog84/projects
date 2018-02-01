@@ -1,0 +1,20 @@
+﻿@model Stalker.Models.RegionModel
+
+@{
+    ViewBag.Title = "Редактирование региона";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Редактирование региона</h2>
+@using (Html.BeginForm("EditRegion", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(h => h.RegionId)
+    <div class="form-group">
+        @Html.LabelFor(l => l.RegionName)
+        @Html.TextBoxFor(t => t.RegionName, null, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.RegionName)
+    </div>
+    @Html.ActionLink("Отмена", "Regions", "Admin", new {@class = "btn btn-default"})
+    <button class="btn btn-success">Сохранить</button>
+}

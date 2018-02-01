@@ -1,0 +1,25 @@
+﻿#footer {
+    margin-top: 5pt;
+    color: #888;
+}
+
+@media (min-width: 980px) {
+    body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+    }
+}
+
+/* adjust path for Bootstrap icons */
+[class^="icon-"], [class*=" icon-"] {
+    background-image: url("/Content/images/glyphicons-halflings.png");
+}
+
+.form-control option {
+    padding: 5px 10px;
+    margin: 2px;
+}
+
+.dropdown-menu .navmenu-nav li:hover{
+    background-color: cadetblue;
+}

@@ -1,0 +1,65 @@
+﻿<script>
+    //Генерация списка городов
+    function regionSelected(cities) {
+        var citiesDropDown = document.getElementById("citiesDropDown");
+
+        citiesDropDown.innerHTML = '';
+
+        for (var i = 0; i < cities.length; i++) {
+            var city = cities[i];
+            var option = document.createElement("option");
+            option.text = city.CityName;
+            option.value = city.CityId;
+            citiesDropDown.add(option);
+        }
+    };
+
+    //Добавляем событие выбора региона и вызываем список городов относящихся к этому региону
+    var regionsList = document.getElementById("regionsList");
+    regionsList.addEventListener("change", e => {
+        var target = e.target;
+        var request = new XMLHttpRequest();
+        request.open('GET', '@Url.Action("GetCitiesByRegion", "Admin")' + "?selectedRegionId=" + target.value);
+        request.onload = function() {
+            var cities = JSON.parse(request.responseText);
+            regionSelected(cities);
+        }
+        request.send();
+    });
+
+    //Если список городов пуст, вызовем событие выбора региона
+    var citiesList = document.getElementById('citiesDropDown');
+    if (citiesList.length === 0) {
+        regionsList.dispatchEvent(new Event('change'));
+    }
+
+    //Добавляем список отделов для выбранного управления
+    function managementSelected(departments) {
+        var departmentsDropDown = document.getElementById('departmentsDropDown');
+
+        departmentsDropDown.innerHTML = '';
+
+        for (var i = 0; i < departments.length; i++) {
+            var department = departments[i];
+            var option = document.createElement('option');
+            option.text = department.FullName;
+            option.value = department.DepartmentId;
+            departmentsDropDown.add(option);
+        }
+    }
+
+    //Добавляем событие выбора управления и вызываем список отделов управления
+    var managementsDropDown = document.getElementById('managementsDropDown');
+    managementsDropDown.addEventListener('change', e => {
+        var target = e.target;
+
+        var request = new XMLHttpRequest();
+        request.open('GET', '@Url.Action("GetDepartmentsByManagement", "Admin")' + '?managementId=' + target.value);
+        request.onload = function()
+        {
+            var responce = JSON.parse(request.responseText);
+            managementSelected(responce);
+        }
+        request.send();
+    });
+</script>

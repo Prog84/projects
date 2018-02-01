@@ -1,0 +1,31 @@
+﻿@using Stalker.Entities
+@model IQueryable<StalkerIdentityRole>
+
+@{
+    ViewBag.Title = "Roles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">Роли</div>
+    <table class="table table-striped">
+        <tr><th>Название роли</th><th></th></tr>
+        @if (!Model.Any())
+        {
+            <tr><td colspan="4" class="text-center">Нет ролей</td></tr>
+        }
+        else
+        {
+            foreach (StalkerIdentityRole role in Model)
+            {
+                <tr>
+                    <td>@role.DisplayName</td>
+                    <td class="text-right">
+                        @Html.ActionLink("Редактировать", "Edit", new {id = role.Id}, new {@class = "btn btn-primary btn-xs"})
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+</div>
+@Html.ActionLink("Добавить", "Create", "RoleAdmin", null, new { @class = "btn btn-primary" })

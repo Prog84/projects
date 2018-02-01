@@ -1,0 +1,49 @@
+﻿
+@using Stalker.Models
+@model List<Menu>
+
+<ul class="nav navbar-nav">
+    @foreach (Menu menu in Model)
+    {
+        <li class="dropdown">
+            @if (string.IsNullOrWhiteSpace(menu.Url))
+            {
+
+                <a href="#" class="dropdown-toggle" id="dropdownCommonMenu" data-toggle="dropdown">
+                    <span class="icon">
+                            <i class="@menu.CssIcon" aria-hidden="true"></i>
+                        </span>
+                    @menu.Name
+                </a>
+            }
+            else
+            {
+                <a href="@Url.Content(menu.Url)">
+                    @menu.Name
+                    <span class="icon">
+                            <i class="@menu.CssIcon" aria-hidden="true"></i>
+                        </span>
+                </a>
+            }
+            @if (menu.SubMenus.Any())
+            {
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu navmenu-nav" role="menu" aria-labelledby="dropdownCommonMenu">
+                    @foreach (SubMenu subMenu in menu.SubMenus)
+                    {
+                        <li role="menuitem">
+                            <a href="@Url.Content(subMenu.Url)">
+                                @subMenu.Name
+                                <span class="icon">
+                                        <i class="@subMenu.CssIcon" aria-hidden="true"></i>
+                                    </span>
+                            </a>
+                        </li>
+                    }
+                </ul>
+            }
+        </li>
+    }
+</ul>

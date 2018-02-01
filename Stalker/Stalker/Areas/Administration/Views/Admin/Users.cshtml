@@ -1,0 +1,56 @@
+﻿@using Stalker.Models
+@model List<UserBaseInfo>
+
+
+@{
+    ViewBag.Title = "Администрирование";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Учетные записи пользователей
+    </div>
+    <table class="table table-striped table-bordered table-condensed">
+        <tr>
+            <th>Логин</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Дата рождения</th>
+            <th>Населенный пункт</th>
+            <th>Управление</th>
+            <th>Структурное подразделение</th>
+            <th>Действия</th>
+        </tr>
+
+                @foreach (UserBaseInfo user in Model)
+            {
+                    <tr>
+                        <td>@user.UserLogin</td>
+                        <td>@user.UserFamily</td>
+                        <td>@user.UserName</td>
+                        <td>@user.UserOtch</td>
+                        <td>
+                            @if (user.UserDateBirth != null)
+                            {
+                                @user.UserDateBirth.Value.ToShortDateString()
+                            }
+                        </td>
+                        <td>@user.City.CityName</td>
+                        <td>@user.Management.FullName</td>
+                        <td>@user.Department.FullName</td>
+                        <td>
+                            <div class="center-block">
+                                @Html.ActionLink("Редактировать", "EditUser", new { id = @user.Id }, new { @class = "btn btn-primary btn-xs" })
+                            </div>
+                        </td>
+                       @* <td>
+        @(Model.LockoutEnabled ? Html.ActionLink("Разблокировать", "Unblock", "Admin", new { userId = Model.Id }, new { @class = "btn btn-success" }) : Html.ActionLink("Заблокировать", "Block", "Admin", new { userId = Model.Id }, new { @class = "btn btn-danger" }))
+    </td>*@
+            </tr>
+        }
+    </table>
+</div>
+@Html.ActionLink("Создать", "CreateUser", null, new { @class = "btn btn-primary" })
+  

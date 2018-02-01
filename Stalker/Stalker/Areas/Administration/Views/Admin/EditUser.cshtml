@@ -1,0 +1,72 @@
+﻿@model Stalker.Models.EditUserModel
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Редактирование сведений о пользователе</h2>
+<div class="form-group">
+    <p>Учетная запись пользователя: @Model.UserLogin</p>
+</div>
+@Html.ValidationSummary()
+<div class="col-xs-4">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(l => l.UserLogin)
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.UserFamily)
+            @Html.TextBoxFor(t => t.UserFamily, new {@class = "form-control"})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.UserName)
+            @Html.TextBoxFor(t => t.UserName, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.UserName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.UserOtch)
+            @Html.TextBoxFor(t => t.UserOtch, new {@class = "form-control"})
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.UserDateBirth)
+            @Html.TextBoxFor(t => t.UserDateBirth, "{0:dd/MM/yyyy}", new { @class = "form-control datepicker" })
+            @Html.ValidationMessageFor(m => m.UserDateBirth)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.SelectedManagementId)
+            @Html.DropDownList("SelectedManagementId", null, new { @class = "form-control", @id= "managementsDropDown" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.SelectedDepartmentId)
+            @Html.DropDownList("SelectedDepartmentId", null, new { @class = "form-control", id= "departmentsDropDown" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.SelectedRegionId)
+            @Html.DropDownList("SelectedRegionId", null, new { @class = "form-control", @id = "regionsList" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(l => l.SelectedCityId)
+            @Html.DropDownList("SelectedCityId", null, new { @class = "form-control", @id = "citiesDropDown" })
+        </div>
+
+        @Html.ActionLink("Отмена", "Users", null, new { @class = "btn btn-default" })
+        <button type="submit" class="btn btn-success">Сохранить</button>
+    }
+</div>
+
+<div class="col-xs-4">
+    @Html.ActionLink("Сбросить пароль", "ResetPassword", "Admin", new { userId = Model.Id }, new {@class = "btn btn-warning"}) 
+    @(Model.LockoutEnabled ? Html.ActionLink("Разблокировать", "Unblock", "Admin", new { userId = Model.Id }, new { @class = "btn btn-success" }) : Html.ActionLink("Заблокировать", "Block", "Admin", new { userId = Model.Id }, new { @class = "btn btn-danger" }))
+</div>
+@section GetCitiesScriptRender{
+    @Html.Partial("GetCitiesScript")
+}

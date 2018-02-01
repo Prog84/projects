@@ -1,0 +1,19 @@
+﻿@using Stalker.Models
+@model RegionModel
+@{
+    ViewBag.Title = "Создание региона";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Создание региона</h2>
+@using (Html.BeginForm("CreateRegion", "Admin"))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.LabelFor(l => l.RegionName)
+        @Html.TextBoxFor(t => t.RegionName, null, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.RegionName)
+    </div>
+    @Html.ActionLink("Отмена", "Regions", "Admin", null, new { @class = "btn btn-default"})
+    <button type="submit" class="btn btn-success">Сохранить</button>
+}

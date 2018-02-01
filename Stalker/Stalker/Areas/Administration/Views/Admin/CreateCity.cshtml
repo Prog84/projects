@@ -1,0 +1,29 @@
+﻿@using Stalker.Models
+@model Stalker.Models.CityModel
+
+@{
+    ViewBag.Title = "Добавление города";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Добавление населенного пункта</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationMessage("Error")
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.CityName)
+        @Html.TextBoxFor(t => t.CityName, null, new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.CityName)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(l => l.RegionId)
+        @Html.DropDownListFor(d => d.RegionId, new SelectList(Model.Regions, "RegionId", "RegionName"), new {@class = "form-control"})
+        @Html.ValidationMessageFor(m => m.RegionId)
+    </div>
+    @Html.ActionLink("Отмена", "Cities", "Admin", new { @class = "btn btn-default" })
+    <button type="submit" class="btn btn-success">Сохранить</button>
+}
+

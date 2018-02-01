@@ -1,0 +1,26 @@
+﻿@model System.Collections.Generic.List<Stalker.Models.CityModel>
+
+@{
+    ViewBag.Title = "Населенные пункты";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Населенные пункты</h2>
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <tr>
+            <th>Название</th>
+            <th>Регион</th>
+            <th class="pull-right">Действия</th>
+        </tr>
+        @foreach (var city in Model)
+        {
+            <tr>
+                <td>@city.CityName</td>
+                <td>@city.RegionName</td>
+                <td>@Html.ActionLink("Редактировать", "EditCity", "Admin", new { cityId = city.CityId }, new { @class = "btn btn-primary btn-xs pull-right" })</td>
+            </tr>
+        }
+    </table>
+</div>
+@Html.ActionLink("Добавить", "CreateCity", "admin", null, new { @class = "btn btn-primary"})

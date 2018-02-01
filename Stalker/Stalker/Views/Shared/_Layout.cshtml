@@ -1,0 +1,84 @@
+﻿@using System.Web.Optimization
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" http-equiv="content-type" charset="utf-8"/>
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/css")
+    <style>
+        .navbar .nav > li > a {
+            float: left;
+            /*padding: 10px 15px 10px;*/
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home", new { area = "" })">Сталкер</a>
+            </div>
+            <ul class="nav navbar-nav">
+                @if (Request.IsAuthenticated)
+                {
+                          // @Html.Action("Index", "Menu")
+                          <li><a class="nav-item active" href="@Url.Action("Users", "Admin", new { area = "Administration" })">Пользователи</a></li>
+                          <li><a class="nav-item" href="@Url.Action("Index", "RoleAdmin", new { area = "" })">Роли</a></li>
+                          <li><a class="nav-item" href="@Url.Action("Regions", "Admin", new { area = "Administration" })">Регионы</a></li>
+                          <li><a class="nav-item" href="@Url.Action("Cities", "Admin", new { area = "Administration" })">Города</a></li>
+                          <li><a class="nav-item" href="@Url.Action("Managements", "Admin", new { area = "Administration" })">Управления</a></li>
+                          <li><a class="nav-item" href="@Url.Action("Departments", "Admin", new { area = "Administration" })">Отделы</a></li>
+                }
+            </ul>
+            @Html.Partial("_LoginPartial")
+           
+        </div>
+    </nav>
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row-fluid">
+                @if (TempData[Message.SuccessMessage] != null)
+                {
+                    <div class="alert alert-success text-center">@TempData[Message.SuccessMessage]</div>
+                }
+
+                @if (TempData[Message.ErrorMessage] != null)
+                {
+                    <div class="alert alert-danger text-center">@TempData[Message.ErrorMessage]</div>
+                }
+            </div>
+            <div class="row-fluid">
+                <div id="content" class="span12">
+                    <noscript>
+                        <div class="alert">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Внимание!</strong> Пожалуста включите JavaScript в вашем браузере!
+                        </div>
+                    </noscript>
+                    <div class="col-xs-2">
+
+                    </div>
+                    <div class="col-xs-10">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-fluid">
+                <footer id="footer">
+                    <p>&copy; @DateTime.Now.Year - ПО Сталкер создано 6 отделом.</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+        @Scripts.Render("~/js")
+    <script>
+        $(function() {
+            $(".datepicker").datepicker({ format: 'DD.MM.YYYY' });
+        });
+    </script>
+
+       @RenderSection("GetCitiesScriptRender", required: false)
+    </body>
+    </html>
